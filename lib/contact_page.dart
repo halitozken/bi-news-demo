@@ -42,7 +42,7 @@ class _MyHomePageState extends State<ContactPage> {
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 8),
-          Text('Software Developer',
+          Text('Developer',
               style: TextStyle(fontSize: 20, color: Colors.black)),
           SizedBox(height: 36),
           Row(
