@@ -3,7 +3,7 @@ import '../models/articles.dart';
 
 Widget listWidget(Articles articles) {
   var publishedDate = articles.publishedAt.toString();
-  var spliceDate = publishedDate.substring(2, 10);
+  var spliceDate = publishedDate.substring(0, 10);
 
   // var authorName = articles.author;
   // if(authorName.startsWith("http"));
@@ -49,16 +49,12 @@ Widget listWidget(Articles articles) {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.person),
-                    Text(
-                      articles.author ?? "Unknown",
-                      style: TextStyle(fontSize: 12.0),
-                    ),
-                    SizedBox(width: 10.0),
                     Icon(Icons.date_range),
                     Text(
-                      spliceDate,
+                      spliceDate ?? "Unknown",
+                      style: TextStyle(fontSize: 12.0),
                     ),
+                    
                   ],
                 )
               ],
