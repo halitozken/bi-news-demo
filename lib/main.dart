@@ -115,6 +115,7 @@ class _MyHomePageState extends State<Anasayfa>
             title: Text("Bi' News",
                 style: TextStyle(
                   color: Colors.white,
+                  fontSize: 32
                 )),
             bottom: PreferredSize(
                 preferredSize: Size.fromHeight(30.0),
