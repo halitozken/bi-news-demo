@@ -18,11 +18,11 @@ class _MyHomePageState extends State<ContactPage> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 80.0,
-          backgroundColor: Colors.black26,
+          backgroundColor: Color.fromARGB(171, 204, 215, 215),
           centerTitle: true,
           title: const Text("Contact",
               style: TextStyle(
-                color: Colors.white,
+                color: Color.fromARGB(172, 0, 0, 0),
               )),
         ),
         body: ListView(
@@ -30,21 +30,33 @@ class _MyHomePageState extends State<ContactPage> {
           children: <Widget>[
             buildTop(),
             buildContent(),
+            buildText()
           ],
         ));
   }
 
+  Widget buildText() => Column(
+        children: const [
+          Padding(
+              padding: EdgeInsets.all(24),
+              child: Text(
+                "halitozken@gmail.com",
+                style: TextStyle(fontSize: 22),
+              ))
+        ],
+      );
+
   Widget buildContent() => Column(
         children: [
-          SizedBox(height: 38),
-          Text(
+          const SizedBox(height: 38),
+          const Text(
             'Halit Ozken',
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
-          Text('Developer',
+          const SizedBox(height: 8),
+          const Text('Developer',
               style: TextStyle(fontSize: 20, color: Colors.black)),
-          SizedBox(height: 36),
+          const SizedBox(height: 36),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

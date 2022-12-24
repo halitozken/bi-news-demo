@@ -51,7 +51,7 @@ Widget listWidget(Articles articles) {
                   children: [
                     Icon(Icons.date_range),
                     Text(
-                      spliceDate ?? "Unknown",
+                      spliceDate,
                       style: TextStyle(fontSize: 12.0),
                     ),
                     

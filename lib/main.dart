@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_project/api_info_page.dart';
 import 'package:my_project/contact_page.dart';
 import 'package:my_project/data/news_service.dart';
 import 'package:my_project/data/tech_news_service.dart';
@@ -9,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'data/health_news_service.dart';
 import 'data/science_news_service.dart';
 import 'data/sports_news_service.dart';
+
 // ignore_for_file: prefer_const_constructors
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Anasayfa(),
     );
-  } 
+  }
 }
 
 class Anasayfa extends StatefulWidget {
@@ -38,19 +38,24 @@ class _MyHomePageState extends State<Anasayfa>
     with SingleTickerProviderStateMixin {
   List<Tab> tabList = [
     Tab(
-      child: Text("Latest"),
+      child: Text("Latest",
+          style: TextStyle(color: Color.fromARGB(255, 255, 19, 3))),
     ),
     Tab(
-      child: Text("Technology"),
+      child: Text("Technology",
+          style: TextStyle(color: Color.fromARGB(255, 1, 100, 180))),
     ),
     Tab(
-      child: Text("Sport"),
+      child: Text("Sport",
+          style: TextStyle(color: Color.fromARGB(255, 205, 124, 1))),
     ),
     Tab(
-      child: Text("Science"),
+      child: Text("Science",
+          style: TextStyle(color: Color.fromARGB(255, 188, 169, 0))),
     ),
     Tab(
-      child: Text("Health"),
+      child: Text("Health",
+          style: TextStyle(color: Color.fromARGB(255, 0, 188, 6))),
     ),
   ];
 
@@ -110,35 +115,35 @@ class _MyHomePageState extends State<Anasayfa>
     return Scaffold(
         appBar: AppBar(
             toolbarHeight: 110.0,
-            backgroundColor: Colors.black26,
+            backgroundColor: Color.fromARGB(171, 204, 215, 215),
             centerTitle: true,
             title: Text("Bi' News",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32
-                )),
+                    color: Color.fromARGB(172, 0, 0, 0), fontSize: 32)),
             bottom: PreferredSize(
                 preferredSize: Size.fromHeight(30.0),
                 child: TabBar(
-                  indicatorColor: Colors.white,
+                  indicatorColor: Color.fromARGB(172, 0, 0, 0),
                   isScrollable: true,
                   labelColor: Colors.white,
                   controller: _tabController,
                   tabs: tabList,
                 ))),
         drawer: Drawer(
-          backgroundColor: Colors.grey,
+          backgroundColor: Color.fromARGB(125, 0, 0, 0),
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
-                decoration:
-                    BoxDecoration(color: Colors.white),
-                child: Text("Bi' News v1.0", style: TextStyle(color: Colors.black))
-                    
-              ),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(172, 0, 0, 0)),
+                  child: Text("Bi' News v1.0",
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Color.fromARGB(255, 255, 255, 255)))),
               ListTile(
-                title: const Text('Contact', style: TextStyle(color: Colors.white)),
+                title: const Text('Contact',
+                    style: TextStyle(color: Colors.white, fontSize: 22)),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -146,15 +151,6 @@ class _MyHomePageState extends State<Anasayfa>
                           builder: (context) => const ContactPage()));
                 },
               ),
-              ListTile(
-                title: const Text('API Info', style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ApiInfoPage()));
-                },
-              )
             ],
           ),
         ),
@@ -170,25 +166,29 @@ class _MyHomePageState extends State<Anasayfa>
                     itemBuilder: (context, index) {
                       return InkWell(
                           onTap: () async {
-                            await launch(articles[index].url!);
+                            await openBrowserURL(
+                                url: articles[index].url!.toString(),
+                                inApp: true);
                           },
                           child: listWidget(articles[index]));
                     },
                   ),
                 )),
             Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                    child: ListView.builder(
-                  itemCount: techNews.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                        onTap: () async {
-                          await launch(techNews[index].url!);
-                        },
-                        child: listWidget(techNews[index]));
-                  },
-                ))),
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                  child: ListView.builder(
+                itemCount: techNews.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                      onTap: () async {
+                        await openBrowserURL(
+                            url: techNews[index].url.toString(), inApp: true);
+                      },
+                      child: listWidget(techNews[index]));
+                },
+              )),
+            ),
             Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Container(
@@ -197,7 +197,10 @@ class _MyHomePageState extends State<Anasayfa>
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () async {
-                          await launch(sportNews[index].url!);
+                          await openBrowserURL(
+                              url: sportNews[index].url!.toString(),
+                              inApp: true);
+                          
                         },
                         child: listWidget(sportNews[index]));
                   },
@@ -210,7 +213,9 @@ class _MyHomePageState extends State<Anasayfa>
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () async {
-                          await launch(scienceNews[index].url!);
+                          await openBrowserURL(
+                              url: scienceNews[index].url!.toString(),
+                              inApp: true);
                         },
                         child: listWidget(scienceNews[index]));
                   },
@@ -223,12 +228,23 @@ class _MyHomePageState extends State<Anasayfa>
                   itemBuilder: (context, index) {
                     return InkWell(
                         onTap: () async {
-                          await launch(healthNews[index].url!);
+                          await openBrowserURL(
+                              url: healthNews[index].url!.toString(),
+                              inApp: true);
                         },
                         child: listWidget(healthNews[index]));
                   },
                 )))
           ],
         ));
+  }
+
+  Future openBrowserURL({required String url, bool inApp = false}) async {
+    // ignore: deprecated_member_use
+    await launch(
+      url,
+      forceWebView: inApp,
+      enableJavaScript: true,
+    );
   }
 }
