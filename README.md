@@ -1,4 +1,4 @@
 # Bi' News
 
-A news app with developed by Flutter.
+A news app developed with Flutter.
 
